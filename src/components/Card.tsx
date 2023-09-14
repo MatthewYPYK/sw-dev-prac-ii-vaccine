@@ -1,11 +1,12 @@
 import InteractiveCard from './InteractiveCard'
 import styles from './card.module.css'
 import Image from 'next/image'
+import { Rating } from '@mui/material'
 
-export default function Card({ name, image } : { name: string, image: string }) {
+export default function Card({ name, image, score, dispatch } : { name: string, image: string, score: Map<string, number>, dispatch: Function }) {
   return (
     <InteractiveCard contentName={name}>
-      <div className={styles.cardImg}>
+      <div className={styles.cardImg} onClick={() => console.log(score)}>
         <Image
           src={image}
           alt="Picture"
@@ -14,7 +15,19 @@ export default function Card({ name, image } : { name: string, image: string }) 
           className='object-cover rounded-t-lg'
         />
       </div>
-      <div className={styles.cardText}>{name}</div>
+      <div>
+        <div className={styles.cardText}>
+          {name}
+        </div>
+        <Rating
+          className='mt-0'
+          name="simple-controlled"
+          value={score.get(name) ?? 0}
+          onChange={(event: any, newValue: number | null) => {
+            dispatch({ type: "CHANGE", hospital: name, score: newValue });
+          }}
+        />
+      </div>
     </InteractiveCard>
   )
 }
