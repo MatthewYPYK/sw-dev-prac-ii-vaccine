@@ -6,7 +6,7 @@ import { Rating } from '@mui/material'
 export default function Card({ name, image, score, dispatch } : { name: string, image: string, score: Map<string, number>, dispatch: Function }) {
   return (
     <InteractiveCard contentName={name}>
-      <div className={styles.cardImg} onClick={() => console.log(score)}>
+      <div className={styles.cardImg}>
         <Image
           src={image}
           alt="Picture"
@@ -26,6 +26,7 @@ export default function Card({ name, image, score, dispatch } : { name: string, 
           onChange={(event: any, newValue: number | null) => {
             dispatch({ type: "CHANGE", hospital: name, score: newValue });
           }}
+          onClick={(e) => e.stopPropagation()}
         />
       </div>
     </InteractiveCard>

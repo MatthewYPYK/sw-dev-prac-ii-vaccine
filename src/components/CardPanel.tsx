@@ -1,6 +1,7 @@
 "use client"
 import React, { useReducer } from "react";
 import Card from "./Card";
+import Link from "next/link";
 
 export default function CardPanel() {
   const reducer = (state: Map<string, number>, action: { type: string; hospital: string; score: number | null; }) => {
@@ -24,6 +25,12 @@ export default function CardPanel() {
 
   const [ratings, dispatch] = useReducer(reducer, initialState);
 
+  const mockHospital = [
+    { hid: "001", name: "Chulalongkorn Hospital", image: "/img/chula.jpg" },
+    { hid: "002", name: "Rajavithi Hospital", image: "/img/rajavithi.jpg" },
+    { hid: "003", name: "Thammasat University Hospital", image: "/img/thammasat.jpg" },
+  ]
+
   return (
     <div style={{ flexDirection: "row" }}>
       <div style={{
@@ -34,9 +41,18 @@ export default function CardPanel() {
         justifyContent: "flex-start",
         flexWrap: "wrap",
       }}>
-        <Card name={"Chulalongkorn Hospital"} image={"/img/chula.jpg"} score={ratings} dispatch={dispatch}/>
-        <Card name={"Rajavithi Hospital"} image={"/img/rajavithi.jpg"} score={ratings} dispatch={dispatch}/>
-        <Card name={"Thammasat University Hospital"} image={"/img/thammasat.jpg"} score={ratings} dispatch={dispatch}/>
+        { mockHospital.map((item) => {
+          return (
+            <Link className="w-1/5 h-[350px] mr-6 rounded-lg shadow-lg bg-white" href={`/hospital/${item.hid}`}>
+              <Card
+                name={item.name}
+                image={item.image}
+                score={ratings}
+                dispatch={dispatch}
+              />
+            </Link>
+          )
+        })}
       </div>
       <b>Ratings</b>
       { 
