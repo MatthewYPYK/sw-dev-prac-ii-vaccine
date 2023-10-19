@@ -19,15 +19,17 @@ export default function Card({ name, image, score, dispatch } : { name: string, 
         <div className={styles.cardText}>
           {name}
         </div>
-        <Rating
-          className='mt-0'
-          name="simple-controlled"
-          value={score.get(name) ?? 0}
-          onChange={(event: any, newValue: number | null) => {
-            dispatch({ type: "CHANGE", hospital: name, score: newValue });
-          }}
-          onClick={(e) => e.stopPropagation()}
-        />
+        { !score ? null :
+          <Rating
+            className='mt-0'
+            name="simple-controlled"
+            value={score.get(name) ?? 0}
+            onChange={(event: any, newValue: number | null) => {
+              dispatch({ type: "CHANGE", hospital: name, score: newValue });
+            }}
+            onClick={(e) => e.stopPropagation()}
+          />
+        }
       </div>
     </InteractiveCard>
   )
