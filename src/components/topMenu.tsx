@@ -21,11 +21,16 @@ export default async function TopMenu() {
             Sign in
           </div>
         </Link>
-      }
+      }        
+      <Link href="/mybooking">
+        <div className="w-40 text-center ml-4 mt-auto mb-auto color underline decoration-sky-500 text-gray-500">
+          My Booking
+        </div>
+      </Link>
       <div className="h-14 bg-white fixed top-0 right-0 z-30 flex flex-row justify-end">
         <TopMenuItem
           title="Booking"
-          pageRef="/booking"
+          pageRef="/hospital"
         />
         <Image
           src="/img/logo.png"

@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import { authOptions } from './api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth'
 import NextAuthProvider from '@/provider/nextAuthProvider'
+import ReduxProvider from "@/redux/ReduxProvider"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,10 +23,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NextAuthProvider session={session}>
-          <TopMenu/>
-          {children}
-        </NextAuthProvider>
+        <ReduxProvider>
+          <NextAuthProvider session={session}>
+            <TopMenu/>
+            {children}
+          </NextAuthProvider>
+        </ReduxProvider>
       </body>
     </html>
   )

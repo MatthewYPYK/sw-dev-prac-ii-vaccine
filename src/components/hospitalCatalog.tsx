@@ -19,7 +19,7 @@ export default async function HospitalCatalog({ hospitalPromise }) {
           flexWrap: "wrap",
         }}
       >
-        {hospitalJSON.data.map((item) => {console.log("AAAAAA"); 
+        {hospitalJSON.data.map((item) => {
         return(
           <Link
             key={item.id}
